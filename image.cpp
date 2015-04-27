@@ -22,6 +22,14 @@ namespace ptlmuh006{
     Image::Image():imageName(""), header(""), width(0), height(0), data(nullptr){
     }
     
+    Image::Image(int w, int h, uchar** buffer){
+        imageName = "";
+        header = "";
+        width = w;
+        height = h;
+        data = unique_ptr<uchar[]>(*buffer);
+    }
+    
     //copy constructor for image class
     Image::Image(const Image& other){
         imageName = other.imageName;
@@ -72,6 +80,8 @@ namespace ptlmuh006{
         for(Image::iterator othI = other.begin(), thiI = begin(); othI != other.end(); ++othI, ++thiI){
             *thiI = *othI;
         }
+        
+        return *this;
     }
     
     //move assignment for image class
@@ -92,6 +102,8 @@ namespace ptlmuh006{
         other.width = 0;
         other.height = 0;
         other.data = nullptr;
+        
+        return *this;
     }
     
     //Function to load in the pgm image with the given file name
@@ -284,12 +296,16 @@ namespace ptlmuh006{
     //copy assignment for iterator class
     Image::iterator& Image::iterator::operator=(const Image::iterator& rhs){
        ptr = rhs.ptr;
+       
+       return *this;
     }
     
     //move assignment for iterator class
     Image::iterator& Image::iterator::operator=(Image::iterator&& rhs){
         ptr = rhs.ptr;
         rhs.ptr = nullptr;
+        
+        return *this;
     }
     
     //dereference operator for iterator class

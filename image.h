@@ -38,6 +38,7 @@ namespace ptlmuh006{
             Image();                            //default constructor
             Image(const Image& other);          //copy constructor
             Image(Image&& other);               //move constructor
+            Image(int w, int h, uchar** buffer); //constructor for testing
             ~Image();                           //destructor
             Image& operator= (const Image& rhs);//copy assignment
             Image& operator= (Image&& rhs);     //move assignment
@@ -50,6 +51,9 @@ namespace ptlmuh006{
             Image operator!() const; //invert an image
             Image operator/(const Image& rhs) const; //mask an image with another
             Image operator*(const int threshold) const; //threshold an image by given int
+            
+            int getWidth(){return width;};
+            int getHeight(){return height;};
             
         
         public:

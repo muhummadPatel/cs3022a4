@@ -13,13 +13,12 @@ driver.o: driver.cpp
 	$(CPP) -c -o driver.o driver.cpp $(CPPFLAGS)
 
 build-tests:
-	$(CPP) -c -o huffmanTree.o huffmanTree.cpp $(CPPFLAGS)
-	$(CPP) -c -o huffmanNode.o huffmanNode.cpp $(CPPFLAGS)
+	$(CPP) -c -o image.o image.cpp $(CPPFLAGS)
 	$(CPP) -c -o test.o test.cpp $(CPPFLAGS)
-	$(CPP) -o testhuff test.o huffmanNode.o huffmanTree.o $(CPPFLAGS)
+	$(CPP) -o testimageops test.o image.o $(CPPFLAGS)
 
 run-tests:
-	./testhuff
+	./testimageops
 
 clean:
-	rm -f *.o $(EXE_NAME)
+	rm -f *.o $(EXE_NAME) testimageops
