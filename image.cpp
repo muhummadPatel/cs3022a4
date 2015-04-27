@@ -116,13 +116,10 @@ namespace ptlmuh006{
         //read in the header
         string line;
         getline(infile, line);
-        cout << imageName << endl;
         header += line + "\n";
         
         getline(infile, line);
         while(line[0] == '#'){
-            cout << line << endl;
-            
             header += line + "\n";
             
             getline(infile, line);
@@ -132,8 +129,6 @@ namespace ptlmuh006{
         istringstream dimensions(line);
         dimensions >> width;
         dimensions >> height;
-        cout << "height " << height << endl;
-        cout << "width " << width << endl;
         
         //read in and discard the 255
         int range;
