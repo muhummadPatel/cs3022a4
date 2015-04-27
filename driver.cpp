@@ -1,40 +1,88 @@
 #include <iostream>
-#include <fstream>
+#include <string>
 
 #include "image.h"
 
-using namespace ptlmuh006;
+void printUsage(){
+    using namespace std;
+    
+    cout << "imageops Usage:__________" << endl;
+    cout << "imageops <option> outputImageName.pgm" << endl;
+    cout << "\tOptions:___" << endl;
+    cout << "\t-a i1 i2\t(add i1 and i2)" << endl;
+    cout << "\t-s i1 i2\t(subtract i2 from i1)" << endl;
+    cout << "\t-i i1\t\t(invert i1)" << endl;
+    cout << "\t-l i1 i2\t(mask i1 with i2)" << endl;
+    cout << "\t-t i1 f\t\t(threshold i1 with integer value f)" << endl;
+}
 
 int main(int argc, char* argv[]){
-    std::cout << "imageops running" << std::endl;
-    Image i1;
+    using namespace ptlmuh006;
     
-    std::ifstream ifs("shrek_rectangular.pgm");
-    ifs >> i1;
+    if(argc == 5){
+        //we need to do one of the binary operations
+        if(argv[1] == "-a"){
+            //add
+            std::string infile1 = argv[2];
+            std::string infile2 = argv[3];
+            std::string outfilename = argv[4];
+            
+            Image i1; i1.load(infile1);
+            Image i2; i2.load(infile2);
+            Image out = i1 + i2;
+            out.save(outfilename);
+            
+            std::cout << infile1 << " added to " << infile2 << "." << std::endl;
+            std::cout << "Result saved to " << outfilename << "." << std::endl;
+        }else if(argv[1] == "-s"){
+            //subtract
+            std::string infile1 = argv[2];
+            std::string infile2 = argv[3];
+            std::string outfilename = argv[4];
+            
+            Image i1; i1.load(infile1);
+            Image i2; i2.load(infile2);
+            Image out = i1 - i2;
+            out.save(outfilename);
+            
+            std::cout << infile2 << " subtracted from " << infile1 << "." << std::endl;
+            std::cout << "Result saved to " << outfilename << "." << std::endl;
+        }else if(argv[1] == "-l"){
+            //mask
+            std::string infile1 = argv[2];
+            std::string infile2 = argv[3];
+            std::string outfilename = argv[4];
+            
+            Image i1; i1.load(infile1);
+            Image i2; i2.load(infile2);
+            Image out = i1 / i2;
+            out.save(outfilename);
+            
+            std::cout << infile1 << " masked with " << infile2 << "." << std::endl;
+            std::cout << "Result saved to " << outfilename << "." << std::endl;
+        }else if(argv[1] == "-t"){
+            //threshold
+            std::string infilename = argv[2];
+            int threshold = std::stoi(argv[3]);
+            std::string outfilename = argv[4];
+            
+            Image src; src.load(infilename);
+            Image out = src * threshold;
+            out.save(outfilename);
+            
+            std::cout << "Thresholded " << infilename << " with " << threshold << "." << std::endl;
+            std::cout << "Result saved to " << outfilename << "." << std::endl;
+        }else{
+            //incorrect usage
+            printUsage();
+        }
+        
+    }else if(argc == 4){
+        //we need to invert
+    }else{
+        //missing argument/s
+        printUsage();
+    }
     
-    std::ofstream ofs("croc1.pgm");
-    ofs << i1;
-    
-    /*i1.load("shrek_rectangular.pgm");
-    Image i2;
-    i2.load("donkey_mask.pgm");
-    
-    Image sum = i1 + i2;
-    sum.save("sum.pgm");
-    
-    Image diff = i1 - i2;
-    diff.save("diff.pgm");
-    
-    Image inv = !i1;
-    inv.save("inv.pgm");
-    
-    Image msk = i1 / i2;
-    msk.save("msk.pgm");
-    
-    Image lenna;
-    lenna.load("Lenna_standard.pgm");
-    Image thr = lenna * 100;
-    thr.save("thr.pgm");
-    */
-    return 1;
+    return 0;
 }
