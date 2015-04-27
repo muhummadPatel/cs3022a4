@@ -12,12 +12,10 @@ image.o: image.cpp image.h
 driver.o: driver.cpp
 	$(CPP) -c -o driver.o driver.cpp $(CPPFLAGS)
 
-build-tests:
+test:
 	$(CPP) -c -o image.o image.cpp $(CPPFLAGS)
 	$(CPP) -c -o test.o test.cpp $(CPPFLAGS)
 	$(CPP) -o testimageops test.o image.o $(CPPFLAGS)
-
-run-tests:
 	./testimageops
 
 clean:
