@@ -1,8 +1,19 @@
+/*
+ * Driver class. contains the main method. This is the code that is run when the
+ * program executable is run. Handles the parsing of command line arguments and
+ * executes the correct image class code for the chosen opetion. Handles user
+ * io and the creation of any neccessarry image objects.
+ *
+ * Muhummad Patel
+ * 28-Apr-2015
+ */
+
 #include <iostream>
 #include <string>
 
 #include "image.h"
 
+//function to print out the correct usage of the imageops program
 void printUsage(){
     using namespace std;
     
@@ -16,6 +27,7 @@ void printUsage(){
     cout << "\t-t i1 f\t\t(threshold i1 with integer value f)" << endl;
 }
 
+//main method. called when the executable is run
 int main(int argc, char* argv[]){
     using namespace ptlmuh006;
     
