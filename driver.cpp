@@ -78,7 +78,21 @@ int main(int argc, char* argv[]){
         }
         
     }else if(argc == 4){
-        //we need to invert
+        if(argv[1] == "-i"){
+            //we need to invert the given image
+            std::string infilename = argv[2];
+            std::string outfilename = argv[3];
+            
+            Image src; src.load(infilename);
+            Image out = !src;
+            out.save(outfilename);
+            
+            std::cout << "Inverted " << infilename << "." << std::endl;
+            std::cout << "Result saved to " << outfilename << "." << std::endl;
+        }else{
+            //incorrect usage
+            printUsage();
+        }
     }else{
         //missing argument/s
         printUsage();
