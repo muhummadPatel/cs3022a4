@@ -21,7 +21,7 @@ int main(int argc, char* argv[]){
     
     if(argc == 5){
         //we need to do one of the binary operations
-        if(argv[1] == "-a"){
+        if(std::string(argv[1]) == "-a"){
             //add
             std::string infile1 = argv[2];
             std::string infile2 = argv[3];
@@ -34,7 +34,7 @@ int main(int argc, char* argv[]){
             
             std::cout << infile1 << " added to " << infile2 << "." << std::endl;
             std::cout << "Result saved to " << outfilename << "." << std::endl;
-        }else if(argv[1] == "-s"){
+        }else if(std::string(argv[1]) == "-s"){
             //subtract
             std::string infile1 = argv[2];
             std::string infile2 = argv[3];
@@ -47,7 +47,7 @@ int main(int argc, char* argv[]){
             
             std::cout << infile2 << " subtracted from " << infile1 << "." << std::endl;
             std::cout << "Result saved to " << outfilename << "." << std::endl;
-        }else if(argv[1] == "-l"){
+        }else if(std::string(argv[1]) == "-l"){
             //mask
             std::string infile1 = argv[2];
             std::string infile2 = argv[3];
@@ -60,7 +60,7 @@ int main(int argc, char* argv[]){
             
             std::cout << infile1 << " masked with " << infile2 << "." << std::endl;
             std::cout << "Result saved to " << outfilename << "." << std::endl;
-        }else if(argv[1] == "-t"){
+        }else if(std::string(argv[1]) == "-t"){
             //threshold
             std::string infilename = argv[2];
             int threshold = std::stoi(argv[3]);
@@ -78,7 +78,7 @@ int main(int argc, char* argv[]){
         }
         
     }else if(argc == 4){
-        if(argv[1] == "-i"){
+        if(std::string(argv[1]) == "-i"){
             //we need to invert the given image
             std::string infilename = argv[2];
             std::string outfilename = argv[3];
